@@ -62,6 +62,7 @@ import {
     type PublicQuestion,
     type SubmitAnswerResponse,
 } from "@/api/public";
+import { useLearningStore } from "@/stores/learning";
 
 const route = useRoute();
 
@@ -72,6 +73,8 @@ const result = ref<SubmitAnswerResponse | null>(null);
 const loading = ref(false);
 const submitting = ref(false);
 const submitted = ref(false);
+
+const learningStore = useLearningStore();
 
 const loadQuestion = async () => {
     const id = Number(route.params.id);
@@ -107,6 +110,16 @@ const submitAnswer = async () => {
 
         result.value = res.data;
         submitted.value = true;
+
+        learningStore.addQuestionRecord({
+            questionId: id,
+            stem: question.value?.stem || "",
+            selectedAnswer: selectedAnswer.value,
+            correctAnswer: res.data.correctAnswer,
+            isCorrect: res.data.isCorrect,
+            explanation: res.data.explanation,
+            answeredAt: new Date().toISOString(),
+        });
     } catch (error) {
         console.error(error);
         ElMessage.error("答案提交失败");

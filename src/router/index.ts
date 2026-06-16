@@ -5,6 +5,7 @@ import ArticleListView from "@/views/articles/ArticleListView.vue";
 import ArticleDetailView from "@/views/articles/ArticleDetailView.vue";
 import QuestionListView from "@/views/questions/QuestionListView.vue";
 import QuestionDetailView from "@/views/questions/QuestionDetailView.vue";
+import ProgressView from "@/views/progress/ProgressView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -32,6 +33,10 @@ const router = createRouter({
     {
       path: "/questions/:id",
       component: QuestionDetailView,
+    },
+    {
+      path: "/progress",
+      component: ProgressView,
     },
   ],
 });

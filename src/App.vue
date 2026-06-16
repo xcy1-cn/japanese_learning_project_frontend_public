@@ -6,6 +6,7 @@
             <nav class="nav">
                 <RouterLink to="/articles">文章学习</RouterLink>
                 <RouterLink to="/questions">答题练习</RouterLink>
+                <RouterLink to="/progress">学习记录</RouterLink>
             </nav>
         </header>
 

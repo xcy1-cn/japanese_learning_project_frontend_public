@@ -34,12 +34,14 @@ import {
     type PublicArticle,
     type PublicSentence,
 } from "@/api/public";
+import { useLearningStore } from "@/stores/learning";
 
 const route = useRoute();
 
 const loading = ref(false);
 const article = ref<PublicArticle | null>(null);
 const sentences = ref<PublicSentence[]>([]);
+const learningStore = useLearningStore();
 
 const loadData = async () => {
     const id = Number(route.params.id);
@@ -53,8 +55,16 @@ const loadData = async () => {
             getPublicArticleSentencesApi(id),
         ]);
 
-        article.value = articleRes.data.data;
-        sentences.value = sentenceRes.data.data;
+        article.value = articleRes.data;
+        sentences.value = sentenceRes.data;
+
+        if (article.value) {
+            learningStore.addReadingRecord({
+                articleId: article.value.id,
+                title: article.value.title,
+                lastReadAt: new Date().toISOString(),
+            });
+        }
     } finally {
         loading.value = false;
     }
