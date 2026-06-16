@@ -166,8 +166,10 @@ onMounted(() => {
 .options {
     display: flex;
     flex-direction: column;
+    align-items: start;
     gap: 16px;
     margin-bottom: 28px;
+    margin-left: 35%;
 
     :deep(.el-radio) {
         height: auto;

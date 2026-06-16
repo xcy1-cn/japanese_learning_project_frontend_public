@@ -30,7 +30,9 @@ declare module 'vue' {
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
     ElTag: typeof import('element-plus/es')['ElTag']
+    LearningGalaxyBackground: typeof import('./components/LearningGalaxyBackground.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ThreeCanvasBackground: typeof import('./components/ThreeCanvasBackground.vue')['default']
   }
 }
