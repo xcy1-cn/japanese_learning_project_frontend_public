@@ -1,48 +1,39 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import LoginView from "@/views/login/LoginView.vue";
-import AdminLayout from "@/views/layout/AdminLayout.vue";
-import DashboardView from "@/views/dashboard/DashboardView.vue";
+import HomeView from "@/views/home/HomeView.vue";
+import ArticleListView from "@/views/articles/ArticleListView.vue";
+import ArticleDetailView from "@/views/articles/ArticleDetailView.vue";
+import QuestionListView from "@/views/questions/QuestionListView.vue";
+import QuestionDetailView from "@/views/questions/QuestionDetailView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: "/",
-      redirect: "/dashboard",
+      redirect: "/articles",
     },
     {
-      path: "/login",
-      component: LoginView,
+      path: "/home",
+      component: HomeView,
     },
     {
-      path: "/",
-      component: AdminLayout,
-      children: [
-        {
-          path: "dashboard",
-          component: DashboardView,
-        },
-      ],
+      path: "/articles",
+      component: ArticleListView,
+    },
+    {
+      path: "/articles/:id",
+      component: ArticleDetailView,
+    },
+    {
+      path: "/questions",
+      component: QuestionListView,
+    },
+    {
+      path: "/questions/:id",
+      component: QuestionDetailView,
     },
   ],
 });
 
 export default router;
-
-
-router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem("admin_token");
-
-//   if (to.path !== "/login" && !token) {
-//     next("/login");
-//     return;
-//   }
-
-  if (to.path === "/login" && token) {
-    next("/dashboard");
-    return;
-  }
-
-  next();
-});
